@@ -1,8 +1,26 @@
-<nav class="navbar">
-  <div class="logo">🗂️ Drag and Drop </div>
-  <ul class="nav-links">
-  
-    <li><a href="#">Templates</a></li>
-    <li><a href="#">Home</a></li>
-  </ul>
+<nav class="bg-gray-800 text-white">
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- LEFT SECTION: Logo + Links -->
+      <div class="flex items-center space-x-4">
+        <span class="text-xl font-semibold">MyApp</span>
+       
+      </div>
+
+      <!-- RIGHT SECTION: Dropdown/User -->
+      <div class="relative">
+        <button (click)="toggleDropdown()" class="focus:outline-none">
+          <span class="material-icons">account_circle</span>
+        </button>
+
+        <div *ngIf="showDropdown"
+             class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg z-50">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

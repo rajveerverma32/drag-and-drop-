@@ -1,19 +1,57 @@
-<app-navbar> </app-navbar>
-<div class="board" cdkDropListGroup>
-  <div class="column" *ngFor="let list of board" [style.backgroundColor]="list.color">
-    <h3>{{ list.title }}</h3>
 
+<app-navbar/>
+<div class="board-container">
+  <div class="board" cdkDropListGroup>
     <div
-      class="card-list"
-      cdkDropList
-      [cdkDropListData]="list.cards"
-      (cdkDropListDropped)="drop($event)"
+      class="column"
+      *ngFor="let list of board; let listIndex = index"
+      [style.backgroundColor]="list.color"
     >
-      <div class="card" *ngFor="let card of list.cards" cdkDrag>
-        {{ card }}
+   <div class="column-header">
+  <h3>{{ list.title }}</h3>
+
+  <div class="dropdown">
+    <button class="hamburger-btn" (click)="toggleDropdown(listIndex)">≡</button>
+    <div class="dropdown-menu" *ngIf="dropdownIndex === listIndex">
+      <button class="dropdown-item" (click)="editColumn(listIndex)">Edit Column</button>
+      <button class="dropdown-item delete" (click)="deleteColumn(listIndex)">Delete Column</button>
+    </div>
+  </div>
+</div>
+
+
+
+      <div
+        class="card-list"
+        cdkDropList
+        [cdkDropListData]="list.cards"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="card"
+          *ngFor="let card of list.cards; let cardIndex = index"
+          cdkDrag
+        >
+         <div class="card-content">
+  {{ card }}
+  <div class="card-menu">
+    <button class="card-hamburger" (click)="toggleCardDropdown(listIndex, cardIndex)">︙</button>
+    <div class="card-dropdown" *ngIf="cardDropdownIndex?.list === listIndex && cardDropdownIndex?.card === cardIndex">
+      <button class="card-dropdown-item" (click)="editCard(listIndex, cardIndex)">Edit Card</button>
+      <button class="card-dropdown-item delete" (click)="deleteCard(list, cardIndex)">Delete Card</button>
+    </div>
+  </div>
+</div>
+
+        </div>
       </div>
+
+      <button class="add-card-btn" (click)="addCard(list)">+ Add a card</button>
     </div>
 
-    <button class="add-card" (click)="addCard(list)">+ Add a card</button>
+    <!-- Add Column -->
+    <div class="column add-column">
+      <button (click)="addColumn()">+ Add Column</button>
+    </div>
   </div>
 </div>

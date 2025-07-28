@@ -1,60 +1,206 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: linear-gradient(135deg, #e0f7fa, #fff);
-  font-family: Arial, sans-serif;
+.board-container {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #f0f2f5;
+  min-height: 90vh;
+  overflow-x: auto;
 }
 
 .board {
   display: flex;
-  padding: 20px;
+  flex-direction: row;
   gap: 20px;
-  min-height: 100vh;
-  box-sizing: border-box;
   overflow-x: auto;
+  padding: 10px;
+  flex-wrap: nowrap;
 }
 
 .column {
-  width: 250px;
-  min-height: 400px;
-  padding: 16px;
+  background-color: #ffffff;
+  color: #333;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  min-height: 300px;
+  padding: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  transition: box-shadow 0.2s ease;
+}
+
+.column:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.column-title {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2d3748;
 }
 
 .card-list {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.5rem;
+  min-height: 100px;
 }
 
 .card {
-  background: white;
-  padding: 12px;
+  background-color: #edf2f7;
   border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
   cursor: grab;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-size: 0.95rem;
+  color: #2d3748;
+  border-left: 4px solid #4299e1;
 }
 
-.add-card {
-  margin-top: 12px;
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  padding: 8px 10px;
+.card:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.add-card-btn {
+  margin-top: 1rem;
+  background-color: #ebf8ff;
+  border: 1px dashed #90cdf4;
+  color: #2b6cb0;
+  padding: 0.5rem;
+  font-size: 0.9rem;
   border-radius: 6px;
   cursor: pointer;
-  align-self: flex-start;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.add-card-btn:hover {
+  background-color: #bee3f8;
+  color: #2c5282;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🔺 Delete Button Style */
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}
+
+/* 🟩 Column Header and Hamburger */
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.column-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* 🟦 Column Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 0;
+  z-index: 100;
+  min-width: 130px;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-item.delete {
+  color: red;
   font-weight: bold;
 }
 
-.add-card:hover {
-  background-color: #1565c0;
+/* 🟨 Card Dropdown */
+.card-menu {
+  position: relative;
+  display: inline-block;
+  float: right;
 }
 
+.card-hamburger {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 8px;
+}
 
+.card-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 0;
+  z-index: 10;
+  min-width: 100px;
+}
+
+.card-dropdown-item {
+  padding: 6px 10px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.card-dropdown-item.delete {
+  color: red;
+}
